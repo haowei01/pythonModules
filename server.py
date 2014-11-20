@@ -2,7 +2,8 @@
 import time
 import socket
 
-s = socket.socket()
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 host = socket.gethostname()
 port = 12345
 s.bind((host, port))
@@ -19,4 +20,3 @@ while True:
       c.send('PONG ' + time_s)
     break
   c.close()
-  break
